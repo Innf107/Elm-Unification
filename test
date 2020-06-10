@@ -1,0 +1,6 @@
+[Unif { e = [], rule = "-", yE = [(Var "b",Constr "Either" [Var "d",Var "d"]),(Var "a",Var "c")] },
+ Unif { e = [], rule = "Z", yE = [(Var "b",Constr "Either" [Var "d",Var "d"]),(Var "a",Var "c")] },
+ Unif { e = [(Var "b",Constr "Either" [Var "d",Var "d"])], rule = "Z", yE = [(Var "a",Var "c")] },
+ Unif { e = [(Var "a",Var "c"),(Var "b",Constr "Either" [Var "d",Var "d"])], rule = "E", yE = [] },
+ Unif { e = [(Var "a",Var "c"),(Var "b",Constr "Either" [Var "d",Var "d"]),(Var "c",Var "c")], rule = "Z", yE = [] }]
+
