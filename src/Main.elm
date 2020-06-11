@@ -31,8 +31,7 @@ init = {
         type2 = Nothing,
         parseErrorT1 = Nothing,
         parseErrorT2 = Nothing,
-        unifs = unify (Constr "Point" [Var "a", Var "b", Var "c"])
-                      (Constr "Point" [Var "c", Constr "Either" [Var "d", Var "d"], Var "c"])
+        unifs = []
     }
 
 type Msg = UpdateType1Text String
