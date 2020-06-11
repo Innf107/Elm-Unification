@@ -17,8 +17,8 @@ unify_ : List (Type, Type) -> List (Type, Type) -> Unifs
 unify_ a b = case (a, b) of
     ([], yE) -> [Unif {e=[], yE=yE, rule="-"}]
     (e_, yE_)  -> case (tryRules [ruleE, ruleV, ruleZ, ruleK] e_ yE_) of
-                    ((Unif {rule})::xs, e, yE) -> unify_ e yE ++ Unif{e=e, yE=yE, rule=rule}::xs
-                    ((OccursCheck t)::xs, _, _) -> (OccursCheck t)::xs
+                    ((Unif {rule, e, yE})::xs, e2, yE2) -> unify_ e2 yE2 ++ Unif{e=e, yE=yE, rule=rule}::xs
+                    ((OccursCheck t1 t2)::xs, e2, yE2) -> (OccursCheck t1 t2)::Unif{e=e2, yE=yE2, rule="-"}::xs
                     ((NoRulesMatched)::xs, _, _) -> (NoRulesMatched)::xs
                     _ -> [NoRulesMatched, NoRulesMatched, NoRulesMatched]
 
@@ -60,8 +60,8 @@ ruleK e yE = let (e_, yE_) = construct e yE
                         else (e, yE)
                     (e2::es, yE2) -> let (e2_, yE2_) = construct es yE2 in (e2::e2_, yE2_)
              in case find occursCheck e of
-                    Just (_, t) -> Just ([OccursCheck t], e, yE)
-                    Nothing -> if e_ == e && yE_ == yE then Nothing else Just ([Unif {e=e, yE=yE, rule="Z"}], e_, yE_)
+                    Just (t1, t2) -> Just ([OccursCheck t1 t2], e, yE)
+                    Nothing -> if e_ == e && yE_ == yE then Nothing else Just ([Unif {e=e, yE=yE, rule="K"}], e_, yE_)
 
 occursCheck : (Type, Type) -> Bool
 occursCheck (t1, t2) = case t1 of

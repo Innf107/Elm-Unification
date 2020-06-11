@@ -9,7 +9,7 @@ type Unif = Unif {
                 yE: List (Type, Type),
                 rule: String
             }
-    | OccursCheck Type
+    | OccursCheck Type Type
     | NoRulesMatched
 
 type alias Unifs = List Unif
